@@ -53,10 +53,65 @@ const platforms: Domain[] = [
 ];
 
 // ============ Demo Data ============
-const getDemoData = (domainId: string): AnalysisResult => {
+const getDemoData = (domainId: string, username: string): AnalysisResult => {
+  // Detect if it's a green case (normal user)
+  const isGreenCase = username.toLowerCase().includes('real') || 
+                      username.toLowerCase().includes('normal') || 
+                      username.toLowerCase().includes('human') ||
+                      username.toLowerCase().includes('genuine');
+  
+  if (isGreenCase) {
+    return {
+      username: username,
+      suspiciousScore: 18,
+      features: [
+        { name: '帳號年齡', value: 12, weight: 0.20 },
+        { name: '發文頻率', value: 15, weight: 0.25 },
+        { name: '互動模式', value: 22, weight: 0.20 },
+        { name: '內容相似度', value: 18, weight: 0.20 },
+        { name: '網絡密度', value: 25, weight: 0.15 },
+      ],
+      posts: [
+        {
+          id: 'p1',
+          content: "今天 market 波動比較大，建議大家理性看待，不要盲目跟風。投資有風險，決策需謹慎。",
+          sentiment: 0.45,
+          manipulativeScore: 12,
+          explanation: "語氣中性理性，無過度情緒化或操控性語言",
+        },
+        {
+          id: 'p2',
+          content: "分享一點個人看法，這支股票的基本面還不錯，但短期可能有調整。僅供參考。",
+          sentiment: 0.52,
+          manipulativeScore: 15,
+          explanation: "表達謙虛、聲明參考性質、無絕對化宣稱",
+        },
+        {
+          id: 'p3',
+          content: "感謝大家的討論，我學到了很多。投資路上互相學習，共同成長。",
+          sentiment: 0.68,
+          manipulativeScore: 8,
+          explanation: "正面互動、無推銷意圖、社群導向",
+        },
+      ],
+      network: [
+        { id: 'n1', username: '@follower_real_01', score: 15, similarity: 12 },
+        { id: 'n2', username: '@normal_user_99', score: 18, similarity: 15 },
+        { id: 'n3', username: '@investor_human', score: 22, similarity: 18 },
+      ],
+      explanations: [
+        "✅ 帳號已建立4年，有穩定的發文歷史",
+        "✅ 95%互動來自真實用戶，互動質量正常",
+        "✅ 內容多樣性高，無模板化特徵",
+        "✅ 發文時間符合正常作息規律",
+        "✅ 無與可疑帳號群體的異常關聯",
+      ],
+    };
+  }
+
   const data: Record<string, AnalysisResult> = {
     cross_strait: {
-      username: '@political_commentator_2024',
+      username: username || '@political_commentator_2024',
       suspiciousScore: 92,
       features: [
         { name: '帳號年齡異常', value: 95, weight: 0.20 },
@@ -345,7 +400,7 @@ export default function BotHunterDashboard() {
     if (!input.trim()) return;
     setLoading(true);
     setTimeout(() => {
-      setResult(getDemoData(selectedDomain));
+      setResult(getDemoData(selectedDomain, input));
       setLoading(false);
     }, 1500);
   };
@@ -442,8 +497,12 @@ export default function BotHunterDashboard() {
                 <h3 className="text-sm font-medium text-slate-500 mb-4">可疑度評分</h3>
                 <CircularScore score={result.suspiciousScore} label="風險等級" />
                 <div className="mt-4 text-center">
-                  <span className="px-4 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold">
-                    網軍帳號偵測
+                  <span className={`px-4 py-1 rounded-full text-sm font-semibold ${
+                    result.suspiciousScore >= 60 
+                      ? 'bg-red-100 text-red-700' 
+                      : 'bg-green-100 text-green-700'
+                  }`}>
+                    {result.suspiciousScore >= 60 ? '網軍帳號偵測' : '正常帳號'}
                   </span>
                 </div>
               </div>
