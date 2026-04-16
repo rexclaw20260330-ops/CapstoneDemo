@@ -1,9 +1,9 @@
-import SciFiBotHunter from '@/components/SciFiBotHunter';
+import IvyLeagueBotHunter from '@/components/IvyLeagueBotHunter';
 
 export default function Home() {
   return (
     <main>
-      <SciFiBotHunter />
+      <IvyLeagueBotHunter />
     </main>
   );
 }

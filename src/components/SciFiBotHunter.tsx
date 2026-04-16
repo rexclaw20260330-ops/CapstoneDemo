@@ -114,8 +114,10 @@ const SciFiBotHunter: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Canvas animation for network graph
+  // Canvas animation for network graph - only run when showResults is true
   useEffect(() => {
+    if (!showResults) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -237,7 +239,7 @@ const SciFiBotHunter: React.FC = () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [showResults]);
 
   const handleAnalyze = () => {
     if (!inputValue) return;
