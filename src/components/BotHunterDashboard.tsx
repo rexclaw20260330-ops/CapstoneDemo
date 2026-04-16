@@ -270,7 +270,7 @@ const CircularScore = ({ score, label }: { score: number; label: string }) => {
     <div className="flex flex-col items-center">
       <div className="relative w-32 h-32">
         <svg width="128" height="128" className="transform -rotate-90">
-          <circle cx="64" cy="64" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="10" />
+          <circle cx="64" cy="64" r={radius} fill="none" stroke="#334155" strokeWidth="10" />
           <circle
             cx="64"
             cy="64"
@@ -284,10 +284,10 @@ const CircularScore = ({ score, label }: { score: number; label: string }) => {
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-2xl font-bold" style={{ color }}>{score}%</span>
+          <span className="text-2xl font-bold text-white">{score}%</span>
         </div>
       </div>
-      <span className="mt-2 text-sm text-slate-600">{label}</span>
+      <span className="mt-2 text-sm text-slate-400">{label}</span>
     </div>
   );
 };
@@ -295,10 +295,10 @@ const CircularScore = ({ score, label }: { score: number; label: string }) => {
 const FeatureBar = ({ feature }: { feature: Feature }) => (
   <div className="mb-3">
     <div className="flex justify-between mb-1">
-      <span className="text-sm text-slate-600">{feature.name}</span>
-      <span className="text-sm font-semibold text-slate-800">{feature.value}% <span className="text-slate-400 font-normal">(權重 {(feature.weight * 100).toFixed(0)}%)</span></span>
+      <span className="text-sm text-slate-400">{feature.name}</span>
+      <span className="text-sm font-semibold text-slate-300">{feature.value}% <span className="text-slate-500 font-normal">(權重 {(feature.weight * 100).toFixed(0)}%)</span></span>
     </div>
-    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+    <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
       <div
         className={`h-full rounded-full transition-all ${
           feature.value >= 80 ? 'bg-red-500' : feature.value >= 60 ? 'bg-orange-500' : 'bg-emerald-500'
@@ -310,46 +310,46 @@ const FeatureBar = ({ feature }: { feature: Feature }) => (
 );
 
 const PostCard = ({ post }: { post: Post }) => (
-  <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-    <p className="text-slate-700 text-sm leading-relaxed mb-4">「{post.content}」</p>
+  <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600 transition-all">
+    <p className="text-slate-300 text-sm leading-relaxed mb-4">「{post.content}」</p>
     <div className="grid grid-cols-2 gap-4 mb-3">
       <div>
-        <span className="text-xs text-slate-400 uppercase">情緒傾向</span>
+        <span className="text-xs text-slate-500 uppercase">情緒傾向</span>
         <div className="flex items-center gap-2 mt-1">
-          <div className="flex-1 h-2 bg-slate-100 rounded-full">
+          <div className="flex-1 h-2 bg-slate-700/50 rounded-full">
             <div className="h-full bg-blue-500 rounded-full" style={{ width: `${post.sentiment * 100}%` }} />
           </div>
-          <span className="text-sm font-semibold text-slate-600 w-12 text-right">
+          <span className="text-sm font-semibold text-slate-400 w-12 text-right">
             {(post.sentiment * 100).toFixed(0)}%
           </span>
         </div>
       </div>
       
       <div>
-        <span className="text-xs text-slate-400 uppercase">操控程度</span>
+        <span className="text-xs text-slate-500 uppercase">操控程度</span>
         <div className="flex items-center gap-2 mt-1">
-          <div className="flex-1 h-2 bg-slate-100 rounded-full">
-            <div className="h-full bg-red-500 rounded-full" style={{ width: `${post.manipulativeScore}%` }} />
+          <div className="flex-1 h-2 bg-slate-700/50 rounded-full">
+            <div className="h-full bg-amber-400 rounded-full" style={{ width: `${post.manipulativeScore}%` }} />
           </div>
-          <span className="text-sm font-semibold text-red-600 w-12 text-right">{post.manipulativeScore}%</span>
+          <span className="text-sm font-semibold text-amber-400 w-12 text-right">{post.manipulativeScore}%</span>
         </div>
       </div>
     </div>
-    <div className="mt-4 pt-4 border-t border-slate-100">
-      <span className="text-xs text-slate-400">標記原因：</span>
-      <span className="text-sm text-slate-600">{post.explanation}</span>
+    <div className="mt-4 pt-4 border-t border-slate-700/50">
+      <span className="text-xs text-slate-500">標記原因：</span>
+      <span className="text-sm text-slate-400">{post.explanation}</span>
     </div>
   </div>
 );
 
 const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
-  <div className="bg-white rounded-xl p-6 border border-slate-200">
+  <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
     <div className="relative h-72">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
           <span className="text-white font-bold text-lg">目標</span>
         </div>
-        <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-slate-600 whitespace-nowrap">調查對象</span>
+        <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-slate-400 whitespace-nowrap">調查對象</span>
       </div>
 
       <svg className="absolute inset-0 w-full h-full">
@@ -358,7 +358,7 @@ const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
           const x = 50 + 32 * Math.cos(angle);
           const y = 50 + 32 * Math.sin(angle);
           return (
-            <line key={i} x1="50%" y1="50%" x2={`${x}%`} y2={`${y}%`} stroke="#cbd5e1" strokeWidth="2" strokeDasharray="4 4" />
+            <line key={i} x1="50%" y1="50%" x2={`${x}%`} y2={`${y}%`} stroke="#475569" strokeWidth="2" strokeDasharray="4 4" />
           );
         })}
       </svg>
@@ -374,17 +374,17 @@ const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
             style={{ left: `${x}%`, top: `${y}%` }}
           >
             <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 ${
-              node.score >= 90 ? 'bg-red-100 border-red-400' : 'bg-orange-100 border-orange-400'
+              node.score >= 90 ? 'bg-red-500/20 border-red-400' : 'bg-amber-500/20 border-amber-400'
             }`}
             >
-              <span className="text-xs font-bold text-slate-700">{node.score}%</span>
+              <span className="text-xs font-bold text-slate-300">{node.score}%</span>
             </div>
             <span className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs text-slate-500 whitespace-nowrap">{node.username}</span>
           </div>
         );
       })}
     </div>
-    <p className="text-center text-xs text-slate-400 mt-6">基於發文模式與互動行為的相似度網絡</p>
+    <p className="text-center text-xs text-slate-500 mt-6">基於發文模式與互動行為的相似度網絡</p>
   </div>
 );
 
@@ -406,17 +406,17 @@ export default function BotHunterDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
-      <header className="border-b border-slate-200">
+      <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur">
         <div className="max-w-6xl mx-auto px-8 py-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
               <span className="text-white text-2xl">🕸️</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">網軍調查器</h1>
-              <p className="text-xs text-slate-500">社群媒體可疑帳號與協同行為偵測系統</p>
+              <h1 className="text-2xl font-bold text-white">網軍調查器</h1>
+              <p className="text-xs text-slate-400">社群媒體可疑帳號與協同行為偵測系統</p>
             </div>
           </div>
         </div>
@@ -424,10 +424,10 @@ export default function BotHunterDashboard() {
 
       <main className="max-w-6xl mx-auto px-8 py-10">
         {/* Domain & Platform Selector + Input */}
-        <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 mb-8">
+        <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50 mb-8">
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-slate-900 mb-2">調查設定</h2>
-            <p className="text-slate-600 text-sm mb-4">選擇調查主題、社群平台並輸入目標帳號</p>
+            <h2 className="text-lg font-semibold text-white mb-2">調查設定</h2>
+            <p className="text-slate-400 text-sm mb-4">選擇調查主題、社群平台並輸入目標帳號</p>
             
             <div className="mb-4">
               <span className="text-xs text-slate-500 uppercase tracking-wider mb-2 block">調查主題</span>
@@ -438,8 +438,8 @@ export default function BotHunterDashboard() {
                     onClick={() => setSelectedDomain(domain.id)}
                     className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
                       selectedDomain === domain.id
-                        ? 'bg-slate-900 text-white shadow-lg'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 shadow-lg'
+                        : 'bg-slate-700/50 text-slate-300 border border-slate-600 hover:border-amber-400/50'
                     }`}
                   >
                     <span>{domain.icon}</span>
@@ -458,8 +458,8 @@ export default function BotHunterDashboard() {
                     onClick={() => setSelectedPlatform(platform.id)}
                     className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
                       selectedPlatform === platform.id
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 shadow-lg'
+                        : 'bg-slate-700/50 text-slate-300 border border-slate-600 hover:border-amber-400/50'
                     }`}
                   >
                     <span>{platform.icon}</span>
@@ -476,13 +476,13 @@ export default function BotHunterDashboard() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="輸入 @使用者名稱..."
-              className="flex-1 px-5 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:outline-none"
+              className="flex-1 px-5 py-3 bg-slate-900 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
               onKeyDown={(e) => e.key === 'Enter' && analyze()}
             />
             <button
               onClick={analyze}
               disabled={!input.trim() || loading}
-              className="px-8 py-3 bg-slate-900 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800 transition-all"
+              className="px-8 py-3 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-orange-500/25 transition-all"
             >
               {loading ? '分析中...' : '開始調查'}
             </button>
@@ -493,34 +493,34 @@ export default function BotHunterDashboard() {
           <div className="space-y-8">
             {/* Overview */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-sm font-medium text-slate-500 mb-4">可疑度評分</h3>
+              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-sm font-medium text-slate-400 mb-4">可疑度評分</h3>
                 <CircularScore score={result.suspiciousScore} label="風險等級" />
                 <div className="mt-4 text-center">
                   <span className={`px-4 py-1 rounded-full text-sm font-semibold ${
                     result.suspiciousScore >= 60 
-                      ? 'bg-red-100 text-red-700' 
-                      : 'bg-green-100 text-green-700'
+                      ? 'bg-red-500/20 text-red-400' 
+                      : 'bg-emerald-500/20 text-emerald-400'
                   }`}>
                     {result.suspiciousScore >= 60 ? '網軍帳號偵測' : '正常帳號'}
                   </span>
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-sm font-medium text-slate-500 mb-4">特徵分析</h3>
+              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-sm font-medium text-slate-400 mb-4">特徵分析</h3>
                 {result.features.map((f) => (
                   <FeatureBar key={f.name} feature={f} />
                 ))}
               </div>
 
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-sm font-medium text-slate-500 mb-4">調查結論</h3>
+              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-sm font-medium text-slate-400 mb-4">調查結論</h3>
                 <div className="space-y-3">
                   {result.explanations.slice(0, 4).map((exp, i) => (
                     <div key={i} className="flex gap-3 text-sm">
-                      <span className="w-5 h-5 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{i + 1}</span>
-                      <span className="text-slate-700">{exp}</span>
+                      <span className="w-5 h-5 bg-amber-400 text-slate-900 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{i + 1}</span>
+                      <span className="text-slate-300">{exp}</span>
                     </div>
                   ))}
                 </div>
@@ -528,8 +528,8 @@ export default function BotHunterDashboard() {
             </div>
 
             {/* Post Analysis */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-semibold text-slate-900 mb-6">貼文層級分析</h2>
+            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50">
+              <h2 className="text-lg font-semibold text-white mb-6">貼文層級分析</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {result.posts.map((post) => (
                   <PostCard key={post.id} post={post} />
@@ -538,8 +538,8 @@ export default function BotHunterDashboard() {
             </div>
 
             {/* Network Analysis */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-semibold text-slate-900 mb-6">網絡關係分析</h2>
+            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50">
+              <h2 className="text-lg font-semibold text-white mb-6">網絡關係分析</h2>
               <div className="max-w-2xl mx-auto">
                 <NetworkGraph nodes={result.network} />
               </div>
@@ -549,10 +549,10 @@ export default function BotHunterDashboard() {
 
         {!result && !loading && (
           <div className="text-center py-20">
-            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">🔍</span>
             </div>
-            <h2 className="text-lg font-medium text-slate-700 mb-2">準備開始調查</h2>
+            <h2 className="text-lg font-medium text-slate-300 mb-2">準備開始調查</h2>
             <p className="text-slate-500 text-sm max-w-md mx-auto">
               選擇調查主題並輸入目標帳號，即可進行網軍行為與協同操控分析。
             </p>
@@ -560,7 +560,7 @@ export default function BotHunterDashboard() {
         )}
       </main>
 
-      <footer className="border-t border-slate-200 mt-12">
+      <footer className="border-t border-slate-700/50 mt-12">
         <div className="max-w-6xl mx-auto px-8 py-6 text-center">
           <p className="text-sm text-slate-500">網軍調查器 • 社群媒體可疑帳號偵測系統</p>
         </div>
