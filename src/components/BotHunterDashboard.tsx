@@ -39,11 +39,17 @@ interface Domain {
   icon: string;
 }
 
-// ============ Domain Data ============
+// ============ Domain & Platform Data ============
 const domains: Domain[] = [
   { id: 'cross_strait', name: '兩岸關係', icon: '🌏' },
   { id: 'bitcoin', name: '比特幣', icon: '₿' },
   { id: 'stocks', name: '股票', icon: '📈' },
+];
+
+const platforms: Domain[] = [
+  { id: 'twitter', name: 'Twitter / X', icon: '𝕏' },
+  { id: 'instagram', name: 'Instagram', icon: '📸' },
+  { id: 'facebook', name: 'Facebook', icon: '📘' },
 ];
 
 // ============ Demo Data ============
@@ -330,6 +336,7 @@ const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
 // ============ Main Component ============
 export default function BotHunterDashboard() {
   const [selectedDomain, setSelectedDomain] = useState('cross_strait');
+  const [selectedPlatform, setSelectedPlatform] = useState('twitter');
   const [input, setInput] = useState('');
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -361,27 +368,50 @@ export default function BotHunterDashboard() {
       </header>
 
       <main className="max-w-6xl mx-auto px-8 py-10">
-        {/* Domain Selector + Input */}
+        {/* Domain & Platform Selector + Input */}
         <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 mb-8">
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-slate-900 mb-2">調查主題</h2>
-            <p className="text-slate-600 text-sm mb-4">選擇調查領域並輸入目標帳號</p>
+            <h2 className="text-lg font-semibold text-slate-900 mb-2">調查設定</h2>
+            <p className="text-slate-600 text-sm mb-4">選擇調查主題、社群平台並輸入目標帳號</p>
             
-            <div className="flex gap-2 mb-6">
-              {domains.map((domain) => (
-                <button
-                  key={domain.id}
-                  onClick={() => setSelectedDomain(domain.id)}
-                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
-                    selectedDomain === domain.id
-                      ? 'bg-slate-900 text-white shadow-lg'
-                      : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <span>{domain.icon}</span>
-                  <span>{domain.name}</span>
-                </button>
-              ))}
+            <div className="mb-4">
+              <span className="text-xs text-slate-500 uppercase tracking-wider mb-2 block">調查主題</span>
+              <div className="flex gap-2">
+                {domains.map((domain) => (
+                  <button
+                    key={domain.id}
+                    onClick={() => setSelectedDomain(domain.id)}
+                    className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      selectedDomain === domain.id
+                        ? 'bg-slate-900 text-white shadow-lg'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <span>{domain.icon}</span>
+                    <span>{domain.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mb-6">
+              <span className="text-xs text-slate-500 uppercase tracking-wider mb-2 block">社群平台</span>
+              <div className="flex gap-2">
+                {platforms.map((platform) => (
+                  <button
+                    key={platform.id}
+                    onClick={() => setSelectedPlatform(platform.id)}
+                    className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      selectedPlatform === platform.id
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <span>{platform.icon}</span>
+                    <span>{platform.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
           
