@@ -1,9 +1,9 @@
-import BotHunterDashboard from '@/components/BotHunterDashboard';
+import SciFiBotHunter from '@/components/SciFiBotHunter';
 
 export default function Home() {
   return (
     <main>
-      <BotHunterDashboard />
+      <SciFiBotHunter />
     </main>
   );
 }
