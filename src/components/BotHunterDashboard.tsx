@@ -33,54 +33,168 @@ interface AnalysisResult {
   explanations: string[];
 }
 
+interface Domain {
+  id: string;
+  name: string;
+  icon: string;
+}
+
+// ============ Domain Data ============
+const domains: Domain[] = [
+  { id: 'cross_strait', name: '兩岸關係', icon: '🌏' },
+  { id: 'bitcoin', name: '比特幣', icon: '₿' },
+  { id: 'stocks', name: '股票', icon: '📈' },
+];
+
 // ============ Demo Data ============
-const demoData: AnalysisResult = {
-  username: '@crypto_promoter_2024',
-  suspiciousScore: 87,
-  features: [
-    { name: 'Account Age Anomaly', value: 95, weight: 0.20 },
-    { name: 'Post Frequency', value: 88, weight: 0.25 },
-    { name: 'Engagement Pattern', value: 92, weight: 0.20 },
-    { name: 'Content Similarity', value: 85, weight: 0.20 },
-    { name: 'Network Density', value: 78, weight: 0.15 },
-  ],
-  posts: [
-    {
-      id: 'p1',
-      content: "This coin will 1000x in 24 hours! Don't miss out! DM for exclusive info!",
-      sentiment: 0.85,
-      manipulativeScore: 94,
-      explanation: "Uses urgency, false scarcity, and excessive hype",
+const getDemoData = (domainId: string): AnalysisResult => {
+  const data: Record<string, AnalysisResult> = {
+    cross_strait: {
+      username: '@political_commentator_2024',
+      suspiciousScore: 92,
+      features: [
+        { name: '帳號年齡異常', value: 95, weight: 0.20 },
+        { name: '發文頻率', value: 88, weight: 0.25 },
+        { name: '互動模式', value: 92, weight: 0.20 },
+        { name: '內容相似度', value: 85, weight: 0.20 },
+        { name: '網絡密度', value: 78, weight: 0.15 },
+      ],
+      posts: [
+        {
+          id: 'p1',
+          content: "最新消息！某方勢力正在暗中操作輿論，大家一定要注意！轉發讓更多人知道！",
+          sentiment: 0.15,
+          manipulativeScore: 94,
+          explanation: "使用情緒化語言、製造對立、呼籲轉發擴散",
+        },
+        {
+          id: 'p2',
+          content: "獨家爆料！內部人士透露真相，媒體都不敢報導！看完你就知道誰在說謊！",
+          sentiment: 0.22,
+          manipulativeScore: 91,
+          explanation: "虛構消息來源、製造虛假權威、陰謀論調",
+        },
+        {
+          id: 'p3',
+          content: "緊急擴散！這件事關乎每個人的未來！不轉發就是幫兇！",
+          sentiment: 0.18,
+          manipulativeScore: 96,
+          explanation: "製造緊急感、道德綁架、二元對立",
+        },
+      ],
+      network: [
+        { id: 'n1', username: '@political_bot_01', score: 96, similarity: 94 },
+        { id: 'n2', username: '@opinion_spreader', score: 94, similarity: 91 },
+        { id: 'n3', username: '@narrative_control', score: 91, similarity: 88 },
+        { id: 'n4', username: '@fake_news_agent', score: 88, similarity: 85 },
+        { id: 'n5', username: '@propaganda_node', score: 85, similarity: 82 },
+      ],
+      explanations: [
+        "帳號建立僅7天，立即開始高頻率發布政治內容",
+        "98%互動來自同質性極高的可疑帳號群體",
+        "內容模板與已知網軍群組#23高度吻合",
+        "發文時間顯示自動化排程特徵",
+        "與32個已標記網軍帳號存在協同互動",
+      ],
     },
-    {
-      id: 'p2',
-      content: "I made $50K in one week. Reply 'YES' if you want my secrets!",
-      sentiment: 0.72,
-      manipulativeScore: 91,
-      explanation: "Unrealistic claims with call-to-action manipulation",
+    bitcoin: {
+      username: '@crypto_guru_2024',
+      suspiciousScore: 89,
+      features: [
+        { name: '帳號年齡異常', value: 92, weight: 0.20 },
+        { name: '發文頻率', value: 95, weight: 0.25 },
+        { name: '互動模式', value: 88, weight: 0.20 },
+        { name: '內容相似度', value: 90, weight: 0.20 },
+        { name: '網絡密度', value: 82, weight: 0.15 },
+      ],
+      posts: [
+        {
+          id: 'p1',
+          content: "🚀 這個幣24小時內會漲1000倍！錯過這次要再等十年！私訊我取得內線消息！",
+          sentiment: 0.88,
+          manipulativeScore: 96,
+          explanation: "誇大報酬、製造緊急感、詐騙式私訊引導",
+        },
+        {
+          id: 'p2',
+          content: "我靠這個策略一週賺了50萬！回覆『我要』帶你進VIP群組！",
+          sentiment: 0.82,
+          manipulativeScore: 93,
+          explanation: "不實宣稱、話術操控、製造稀缺感",
+        },
+        {
+          id: 'p3',
+          content: "所有人都在買這個！最後機會錯過就沒了！馬上行動！💰💰💰",
+          sentiment: 0.85,
+          manipulativeScore: 94,
+          explanation: "從眾效應、FOMO操弄、過度情緒化",
+        },
+      ],
+      network: [
+        { id: 'n1', username: '@crypto_shill_01', score: 95, similarity: 93 },
+        { id: 'n2', username: '@pump_dump_bot', score: 93, similarity: 90 },
+        { id: 'n3', username: '@fake_trader', score: 90, similarity: 87 },
+        { id: 'n4', username: '@scam_promoter', score: 87, similarity: 84 },
+        { id: 'n5', username: '@signal_spammer', score: 84, similarity: 81 },
+      ],
+      explanations: [
+        "帳號創立5天內即發布大量加密貨幣推廣內容",
+        "98%好友來自同質性極高的詐騙帳號網絡",
+        "內容模板與已知加密詐騙群組#47高度吻合",
+        "發文時間顯示自動化排程特徵",
+        "與23個已標記詐騙帳號存在協同互動",
+      ],
     },
-    {
-      id: 'p3',
-      content: "Everyone is buying now! Last chance before it explodes!",
-      sentiment: 0.78,
-      manipulativeScore: 89,
-      explanation: "FOMO tactics and artificial urgency",
+    stocks: {
+      username: '@stock_guru_insider',
+      suspiciousScore: 85,
+      features: [
+        { name: '帳號年齡異常', value: 88, weight: 0.20 },
+        { name: '發文頻率', value: 91, weight: 0.25 },
+        { name: '互動模式', value: 86, weight: 0.20 },
+        { name: '內容相似度', value: 83, weight: 0.20 },
+        { name: '網絡密度', value: 79, weight: 0.15 },
+      ],
+      posts: [
+        {
+          id: 'p1',
+          content: "獨家內線！這檔股票明天一定漲停！私訊我加入內部群組！名額有限！",
+          sentiment: 0.78,
+          manipulativeScore: 95,
+          explanation: "聲稱內線、非法證券建議、製造稀缺感",
+        },
+        {
+          id: 'p2',
+          content: "跟著我操作三個月賺了200%！現在免費帶人，錯過就沒了！",
+          sentiment: 0.75,
+          manipulativeScore: 92,
+          explanation: "不實報酬宣稱、話術操控、免費誘餌",
+        },
+        {
+          id: 'p3',
+          content: "緊急通知！大戶正在布局這檔！散戶趕快跟上！機會稍縱即逝！",
+          sentiment: 0.72,
+          manipulativeScore: 91,
+          explanation: "製造緊急感、虛構大戶行為、從眾操控",
+        },
+      ],
+      network: [
+        { id: 'n1', username: '@fake_insider_01', score: 93, similarity: 91 },
+        { id: 'n2', username: '@pump_group_bot', score: 91, similarity: 88 },
+        { id: 'n3', username: '@stock_shiller', score: 88, similarity: 85 },
+        { id: 'n4', username: '@signal_seller', score: 85, similarity: 82 },
+        { id: 'n5', username: '@fake_analyst', score: 82, similarity: 79 },
+      ],
+      explanations: [
+        "帳號創立不久即頻繁發布證券投資建議",
+        "95%互動來自同質性極高的可疑帳號",
+        "內容模板與已知股票操縱群組#15吻合",
+        "發文時間顯示自動化排程特徵",
+        "與18個已標記異常帳號存在協同互動",
+      ],
     },
-  ],
-  network: [
-    { id: 'n1', username: '@bot_follower_01', score: 96, similarity: 94 },
-    { id: 'n2', username: '@auto_liker_99', score: 94, similarity: 91 },
-    { id: 'n3', username: '@engagement_bot', score: 91, similarity: 88 },
-    { id: 'n4', username: '@promo_spammer', score: 88, similarity: 85 },
-    { id: 'n5', username: '@fake_influencer', score: 85, similarity: 82 },
-  ],
-  explanations: [
-    "Account created 5 days ago with immediate high-frequency posting",
-    "98% of engagement from accounts with similar creation patterns",
-    "Content templates match known bot network #47",
-    "Posting schedule shows automated cron-like behavior",
-    "Cross-promotes with 23 identified bot accounts",
-  ],
+  };
+  return data[domainId] || data.cross_strait;
 };
 
 // ============ Components ============
@@ -121,7 +235,7 @@ const FeatureBar = ({ feature }: { feature: Feature }) => (
   <div className="mb-3">
     <div className="flex justify-between mb-1">
       <span className="text-sm text-slate-600">{feature.name}</span>
-      <span className="text-sm font-semibold text-slate-800">{feature.value}%</span>
+      <span className="text-sm font-semibold text-slate-800">{feature.value}% <span className="text-slate-400 font-normal">(權重 {(feature.weight * 100).toFixed(0)}%)</span></span>
     </div>
     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
       <div
@@ -135,69 +249,73 @@ const FeatureBar = ({ feature }: { feature: Feature }) => (
 );
 
 const PostCard = ({ post }: { post: Post }) => (
-  <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
-    <p className="text-slate-700 text-sm mb-4">&ldquo;{post.content}&rdquo;</p>
+  <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+    <p className="text-slate-700 text-sm leading-relaxed mb-4">「{post.content}」</p>
     <div className="grid grid-cols-2 gap-4 mb-3">
       <div>
-        <span className="text-xs text-slate-400 uppercase">Sentiment</span>
+        <span className="text-xs text-slate-400 uppercase">情緒傾向</span>
         <div className="flex items-center gap-2 mt-1">
           <div className="flex-1 h-2 bg-slate-100 rounded-full">
             <div className="h-full bg-blue-500 rounded-full" style={{ width: `${post.sentiment * 100}%` }} />
           </div>
-          <span className="text-sm font-semibold text-slate-600">{(post.sentiment * 100).toFixed(0)}%</span>
+          <span className="text-sm font-semibold text-slate-600 w-12 text-right">
+            {(post.sentiment * 100).toFixed(0)}%
+          </span>
         </div>
       </div>
+      
       <div>
-        <span className="text-xs text-slate-400 uppercase">Manipulative</span>
+        <span className="text-xs text-slate-400 uppercase">操控程度</span>
         <div className="flex items-center gap-2 mt-1">
           <div className="flex-1 h-2 bg-slate-100 rounded-full">
             <div className="h-full bg-red-500 rounded-full" style={{ width: `${post.manipulativeScore}%` }} />
           </div>
-          <span className="text-sm font-semibold text-red-600">{post.manipulativeScore}%</span>
+          <span className="text-sm font-semibold text-red-600 w-12 text-right">{post.manipulativeScore}%</span>
         </div>
       </div>
     </div>
-    <p className="text-xs text-slate-500"><span className="text-slate-400">Why:</span> {post.explanation}</p>
+    <div className="mt-4 pt-4 border-t border-slate-100">
+      <span className="text-xs text-slate-400">標記原因：</span>
+      <span className="text-sm text-slate-600">{post.explanation}</span>
+    </div>
   </div>
 );
 
 const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
   <div className="bg-white rounded-xl p-6 border border-slate-200">
-    <div className="relative h-80">
-      {/* Center */}
+    <div className="relative h-72">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="w-24 h-24 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
-          <span className="text-white font-bold text-lg">87%</span>
+        <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+          <span className="text-white font-bold text-lg">目標</span>
         </div>
-        <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-slate-600 whitespace-nowrap">Target</span>
+        <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-slate-600 whitespace-nowrap">調查對象</span>
       </div>
 
-      {/* Lines */}
       <svg className="absolute inset-0 w-full h-full">
         {nodes.slice(0, 5).map((_, i) => {
           const angle = (i / 5) * 2 * Math.PI - Math.PI / 2;
-          const x = 50 + 30 * Math.cos(angle);
-          const y = 50 + 30 * Math.sin(angle);
+          const x = 50 + 32 * Math.cos(angle);
+          const y = 50 + 32 * Math.sin(angle);
           return (
             <line key={i} x1="50%" y1="50%" x2={`${x}%`} y2={`${y}%`} stroke="#cbd5e1" strokeWidth="2" strokeDasharray="4 4" />
           );
         })}
       </svg>
 
-      {/* Satellite nodes */}
       {nodes.slice(0, 5).map((node, i) => {
         const angle = (i / 5) * 2 * Math.PI - Math.PI / 2;
-        const x = 50 + 30 * Math.cos(angle);
-        const y = 50 + 30 * Math.sin(angle);
+        const x = 50 + 32 * Math.cos(angle);
+        const y = 50 + 32 * Math.sin(angle);
         return (
           <div
             key={node.id}
             className="absolute transform -translate-x-1/2 -translate-y-1/2"
             style={{ left: `${x}%`, top: `${y}%` }}
           >
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center border-2 ${
+            <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 ${
               node.score >= 90 ? 'bg-red-100 border-red-400' : 'bg-orange-100 border-orange-400'
-            }`}>
+            }`}
+            >
               <span className="text-xs font-bold text-slate-700">{node.score}%</span>
             </div>
             <span className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs text-slate-500 whitespace-nowrap">{node.username}</span>
@@ -205,12 +323,13 @@ const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
         );
       })}
     </div>
-    <p className="text-center text-xs text-slate-400 mt-6">Similarity network based on posting patterns</p>
+    <p className="text-center text-xs text-slate-400 mt-6">基於發文模式與互動行為的相似度網絡</p>
   </div>
 );
 
 // ============ Main Component ============
 export default function BotHunterDashboard() {
+  const [selectedDomain, setSelectedDomain] = useState('cross_strait');
   const [input, setInput] = useState('');
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -219,49 +338,68 @@ export default function BotHunterDashboard() {
     if (!input.trim()) return;
     setLoading(true);
     setTimeout(() => {
-      setResult(demoData);
+      setResult(getDemoData(selectedDomain));
       setLoading(false);
     }, 1500);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur">
+      <header className="border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-8 py-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">🕸️</span>
+            <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center">
+              <span className="text-white text-2xl">🕸️</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">Bot Hunter</h1>
-              <p className="text-xs text-slate-400">Financial Social Media Bot Detection Demo</p>
+              <h1 className="text-2xl font-bold text-slate-900">網軍調查器</h1>
+              <p className="text-xs text-slate-500">社群媒體可疑帳號與協同行為偵測系統</p>
             </div>
           </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-8 py-10">
-        {/* Input Section */}
-        <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50 mb-8">
-          <h2 className="text-lg font-semibold text-white mb-2">Account Analysis</h2>
-          <p className="text-slate-400 text-sm mb-6">Enter a social media account to detect bot activity and coordinated behavior.</p>
+        {/* Domain Selector + Input */}
+        <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 mb-8">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-slate-900 mb-2">調查主題</h2>
+            <p className="text-slate-600 text-sm mb-4">選擇調查領域並輸入目標帳號</p>
+            
+            <div className="flex gap-2 mb-6">
+              {domains.map((domain) => (
+                <button
+                  key={domain.id}
+                  onClick={() => setSelectedDomain(domain.id)}
+                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
+                    selectedDomain === domain.id
+                      ? 'bg-slate-900 text-white shadow-lg'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <span>{domain.icon}</span>
+                  <span>{domain.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
           
           <div className="flex gap-3">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Enter @username..."
-              className="flex-1 px-5 py-3 bg-slate-900 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+              placeholder="輸入 @使用者名稱..."
+              className="flex-1 px-5 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:outline-none"
               onKeyDown={(e) => e.key === 'Enter' && analyze()}
             />
             <button
               onClick={analyze}
               disabled={!input.trim() || loading}
-              className="px-8 py-3 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-orange-500/25 transition-all"
+              className="px-8 py-3 bg-slate-900 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800 transition-all"
             >
-              {loading ? 'Analyzing...' : 'Analyze'}
+              {loading ? '分析中...' : '開始調查'}
             </button>
           </div>
         </div>
@@ -270,28 +408,30 @@ export default function BotHunterDashboard() {
           <div className="space-y-8">
             {/* Overview */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
-                <h3 className="text-sm font-medium text-slate-400 mb-4">Suspicious Score</h3>
-                <CircularScore score={result.suspiciousScore} label="Risk Level" />
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="text-sm font-medium text-slate-500 mb-4">可疑度評分</h3>
+                <CircularScore score={result.suspiciousScore} label="風險等級" />
                 <div className="mt-4 text-center">
-                  <span className="px-4 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-semibold">BOT DETECTED</span>
+                  <span className="px-4 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold">
+                    網軍帳號偵測
+                  </span>
                 </div>
               </div>
 
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
-                <h3 className="text-sm font-medium text-slate-400 mb-4">Feature Breakdown</h3>
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="text-sm font-medium text-slate-500 mb-4">特徵分析</h3>
                 {result.features.map((f) => (
                   <FeatureBar key={f.name} feature={f} />
                 ))}
               </div>
 
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
-                <h3 className="text-sm font-medium text-slate-400 mb-4">Why Flagged?</h3>
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="text-sm font-medium text-slate-500 mb-4">調查結論</h3>
                 <div className="space-y-3">
                   {result.explanations.slice(0, 4).map((exp, i) => (
                     <div key={i} className="flex gap-3 text-sm">
-                      <span className="w-5 h-5 bg-amber-400 text-slate-900 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{i + 1}</span>
-                      <span className="text-slate-300">{exp}</span>
+                      <span className="w-5 h-5 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{i + 1}</span>
+                      <span className="text-slate-700">{exp}</span>
                     </div>
                   ))}
                 </div>
@@ -299,8 +439,8 @@ export default function BotHunterDashboard() {
             </div>
 
             {/* Post Analysis */}
-            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50">
-              <h2 className="text-lg font-semibold text-white mb-6">Post-Level Analysis</h2>
+            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+              <h2 className="text-lg font-semibold text-slate-900 mb-6">貼文層級分析</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {result.posts.map((post) => (
                   <PostCard key={post.id} post={post} />
@@ -309,8 +449,8 @@ export default function BotHunterDashboard() {
             </div>
 
             {/* Network Analysis */}
-            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50">
-              <h2 className="text-lg font-semibold text-white mb-6">Network Analysis</h2>
+            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+              <h2 className="text-lg font-semibold text-slate-900 mb-6">網絡關係分析</h2>
               <div className="max-w-2xl mx-auto">
                 <NetworkGraph nodes={result.network} />
               </div>
@@ -320,20 +460,20 @@ export default function BotHunterDashboard() {
 
         {!result && !loading && (
           <div className="text-center py-20">
-            <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">🔍</span>
             </div>
-            <h2 className="text-lg font-medium text-slate-300 mb-2">Ready to Analyze</h2>
+            <h2 className="text-lg font-medium text-slate-700 mb-2">準備開始調查</h2>
             <p className="text-slate-500 text-sm max-w-md mx-auto">
-              Enter an account above to detect bot activity and coordinated inauthentic behavior.
+              選擇調查主題並輸入目標帳號，即可進行網軍行為與協同操控分析。
             </p>
           </div>
         )}
       </main>
 
-      <footer className="border-t border-slate-700/50 mt-12">
+      <footer className="border-t border-slate-200 mt-12">
         <div className="max-w-6xl mx-auto px-8 py-6 text-center">
-          <p className="text-sm text-slate-500">Bot Hunter Demo • Financial Social Media Bot Detection</p>
+          <p className="text-sm text-slate-500">網軍調查器 • 社群媒體可疑帳號偵測系統</p>
         </div>
       </footer>
     </div>
