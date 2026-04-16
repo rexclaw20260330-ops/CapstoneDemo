@@ -408,15 +408,15 @@ export default function BotHunterDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
-      <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur">
+      <header className="border-b border-slate-200 bg-white">
         <div className="max-w-6xl mx-auto px-8 py-6">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
               <span className="text-white text-2xl">🕸️</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">網軍調查器</h1>
-              <p className="text-xs text-slate-400">社群媒體可疑帳號與協同行為偵測系統</p>
+              <h1 className="text-2xl font-bold text-slate-900">網軍調查器</h1>
+              <p className="text-xs text-slate-500">社群媒體可疑帳號與協同行為偵測系統</p>
             </div>
           </div>
         </div>
@@ -424,10 +424,10 @@ export default function BotHunterDashboard() {
 
       <main className="max-w-6xl mx-auto px-8 py-10">
         {/* Domain & Platform Selector + Input */}
-        <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700/50 mb-8">
+        <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm mb-8">
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-white mb-2">調查設定</h2>
-            <p className="text-slate-400 text-sm mb-4">選擇調查主題、社群平台並輸入目標帳號</p>
+            <h2 className="text-lg font-semibold text-slate-900 mb-2">調查設定</h2>
+            <p className="text-slate-600 text-sm mb-4">選擇調查主題、社群平台並輸入目標帳號</p>
             
             <div className="mb-4">
               <span className="text-xs text-slate-500 uppercase tracking-wider mb-2 block">調查主題</span>
@@ -438,8 +438,8 @@ export default function BotHunterDashboard() {
                     onClick={() => setSelectedDomain(domain.id)}
                     className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
                       selectedDomain === domain.id
-                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 shadow-lg'
-                        : 'bg-slate-700/50 text-slate-300 border border-slate-600 hover:border-amber-400/50'
+                        ? 'bg-slate-900 text-white shadow-lg'
+                        : 'bg-slate-100 text-slate-600 border border-slate-200 hover:border-slate-400'
                     }`}
                   >
                     <span>{domain.icon}</span>
@@ -458,8 +458,8 @@ export default function BotHunterDashboard() {
                     onClick={() => setSelectedPlatform(platform.id)}
                     className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
                       selectedPlatform === platform.id
-                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 shadow-lg'
-                        : 'bg-slate-700/50 text-slate-300 border border-slate-600 hover:border-amber-400/50'
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-slate-100 text-slate-600 border border-slate-200 hover:border-slate-400'
                     }`}
                   >
                     <span>{platform.icon}</span>
@@ -476,7 +476,7 @@ export default function BotHunterDashboard() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="輸入 @使用者名稱..."
-              className="flex-1 px-5 py-3 bg-slate-900 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+              className="flex-1 px-5 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:outline-none"
               onKeyDown={(e) => e.key === 'Enter' && analyze()}
             />
             <button
@@ -549,10 +549,10 @@ export default function BotHunterDashboard() {
 
         {!result && !loading && (
           <div className="text-center py-20">
-            <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">🔍</span>
             </div>
-            <h2 className="text-lg font-medium text-slate-300 mb-2">準備開始調查</h2>
+            <h2 className="text-lg font-medium text-slate-700 mb-2">準備開始調查</h2>
             <p className="text-slate-500 text-sm max-w-md mx-auto">
               選擇調查主題並輸入目標帳號，即可進行網軍行為與協同操控分析。
             </p>
@@ -560,7 +560,7 @@ export default function BotHunterDashboard() {
         )}
       </main>
 
-      <footer className="border-t border-slate-700/50 mt-12">
+      <footer className="border-t border-slate-200 bg-white mt-12">
         <div className="max-w-6xl mx-auto px-8 py-6 text-center">
           <p className="text-sm text-slate-500">網軍調查器 • 社群媒體可疑帳號偵測系統</p>
         </div>
