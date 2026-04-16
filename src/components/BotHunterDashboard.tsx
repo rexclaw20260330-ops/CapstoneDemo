@@ -295,10 +295,10 @@ const CircularScore = ({ score, label }: { score: number; label: string }) => {
 const FeatureBar = ({ feature }: { feature: Feature }) => (
   <div className="mb-3">
     <div className="flex justify-between mb-1">
-      <span className="text-sm text-slate-400">{feature.name}</span>
-      <span className="text-sm font-semibold text-slate-300">{feature.value}% <span className="text-slate-500 font-normal">(權重 {(feature.weight * 100).toFixed(0)}%)</span></span>
+      <span className="text-sm text-slate-600">{feature.name}</span>
+      <span className="text-sm font-semibold text-slate-800">{feature.value}% <span className="text-slate-400 font-normal">(權重 {(feature.weight * 100).toFixed(0)}%)</span></span>
     </div>
-    <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
       <div
         className={`h-full rounded-full transition-all ${
           feature.value >= 80 ? 'bg-red-500' : feature.value >= 60 ? 'bg-orange-500' : 'bg-emerald-500'
@@ -310,46 +310,46 @@ const FeatureBar = ({ feature }: { feature: Feature }) => (
 );
 
 const PostCard = ({ post }: { post: Post }) => (
-  <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600 transition-all">
-    <p className="text-slate-300 text-sm leading-relaxed mb-4">「{post.content}」</p>
+  <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+    <p className="text-slate-700 text-sm leading-relaxed mb-4">「{post.content}」</p>
     <div className="grid grid-cols-2 gap-4 mb-3">
       <div>
-        <span className="text-xs text-slate-500 uppercase">情緒傾向</span>
+        <span className="text-xs text-slate-400 uppercase">情緒傾向</span>
         <div className="flex items-center gap-2 mt-1">
-          <div className="flex-1 h-2 bg-slate-700/50 rounded-full">
+          <div className="flex-1 h-2 bg-slate-100 rounded-full">
             <div className="h-full bg-blue-500 rounded-full" style={{ width: `${post.sentiment * 100}%` }} />
           </div>
-          <span className="text-sm font-semibold text-slate-400 w-12 text-right">
+          <span className="text-sm font-semibold text-slate-600 w-12 text-right">
             {(post.sentiment * 100).toFixed(0)}%
           </span>
         </div>
       </div>
       
       <div>
-        <span className="text-xs text-slate-500 uppercase">操控程度</span>
+        <span className="text-xs text-slate-400 uppercase">操控程度</span>
         <div className="flex items-center gap-2 mt-1">
-          <div className="flex-1 h-2 bg-slate-700/50 rounded-full">
-            <div className="h-full bg-amber-400 rounded-full" style={{ width: `${post.manipulativeScore}%` }} />
+          <div className="flex-1 h-2 bg-slate-100 rounded-full">
+            <div className="h-full bg-amber-500 rounded-full" style={{ width: `${post.manipulativeScore}%` }} />
           </div>
-          <span className="text-sm font-semibold text-amber-400 w-12 text-right">{post.manipulativeScore}%</span>
+          <span className="text-sm font-semibold text-amber-500 w-12 text-right">{post.manipulativeScore}%</span>
         </div>
       </div>
     </div>
-    <div className="mt-4 pt-4 border-t border-slate-700/50">
-      <span className="text-xs text-slate-500">標記原因：</span>
-      <span className="text-sm text-slate-400">{post.explanation}</span>
+    <div className="mt-4 pt-4 border-t border-slate-100">
+      <span className="text-xs text-slate-400">標記原因：</span>
+      <span className="text-sm text-slate-600">{post.explanation}</span>
     </div>
   </div>
 );
 
 const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
-  <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
+  <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
     <div className="relative h-72">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+        <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
           <span className="text-white font-bold text-lg">目標</span>
         </div>
-        <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-slate-400 whitespace-nowrap">調查對象</span>
+        <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-slate-500 whitespace-nowrap">調查對象</span>
       </div>
 
       <svg className="absolute inset-0 w-full h-full">
@@ -358,7 +358,7 @@ const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
           const x = 50 + 32 * Math.cos(angle);
           const y = 50 + 32 * Math.sin(angle);
           return (
-            <line key={i} x1="50%" y1="50%" x2={`${x}%`} y2={`${y}%`} stroke="#475569" strokeWidth="2" strokeDasharray="4 4" />
+            <line key={i} x1="50%" y1="50%" x2={`${x}%`} y2={`${y}%`} stroke="#cbd5e1" strokeWidth="2" strokeDasharray="4 4" />
           );
         })}
       </svg>
@@ -374,17 +374,17 @@ const NetworkGraph = ({ nodes }: { nodes: NetworkNode[] }) => (
             style={{ left: `${x}%`, top: `${y}%` }}
           >
             <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 ${
-              node.score >= 90 ? 'bg-red-500/20 border-red-400' : 'bg-amber-500/20 border-amber-400'
+              node.score >= 90 ? 'bg-red-100 border-red-400' : 'bg-amber-100 border-amber-400'
             }`}
             >
-              <span className="text-xs font-bold text-slate-300">{node.score}%</span>
+              <span className="text-xs font-bold text-slate-700">{node.score}%</span>
             </div>
             <span className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs text-slate-500 whitespace-nowrap">{node.username}</span>
           </div>
         );
       })}
     </div>
-    <p className="text-center text-xs text-slate-500 mt-6">基於發文模式與互動行為的相似度網絡</p>
+    <p className="text-center text-xs text-slate-400 mt-6">基於發文模式與互動行為的相似度網絡</p>
   </div>
 );
 
@@ -493,34 +493,34 @@ export default function BotHunterDashboard() {
           <div className="space-y-8">
             {/* Overview */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
-                <h3 className="text-sm font-medium text-slate-400 mb-4">可疑度評分</h3>
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="text-sm font-medium text-slate-500 mb-4">可疑度評分</h3>
                 <CircularScore score={result.suspiciousScore} label="風險等級" />
                 <div className="mt-4 text-center">
                   <span className={`px-4 py-1 rounded-full text-sm font-semibold ${
                     result.suspiciousScore >= 60 
-                      ? 'bg-red-500/20 text-red-400' 
-                      : 'bg-emerald-500/20 text-emerald-400'
+                      ? 'bg-red-100 text-red-700' 
+                      : 'bg-emerald-100 text-emerald-700'
                   }`}>
                     {result.suspiciousScore >= 60 ? '網軍帳號偵測' : '正常帳號'}
                   </span>
                 </div>
               </div>
 
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
-                <h3 className="text-sm font-medium text-slate-400 mb-4">特徵分析</h3>
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="text-sm font-medium text-slate-500 mb-4">特徵分析</h3>
                 {result.features.map((f) => (
                   <FeatureBar key={f.name} feature={f} />
                 ))}
               </div>
 
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50">
-                <h3 className="text-sm font-medium text-slate-400 mb-4">調查結論</h3>
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="text-sm font-medium text-slate-500 mb-4">調查結論</h3>
                 <div className="space-y-3">
                   {result.explanations.slice(0, 4).map((exp, i) => (
                     <div key={i} className="flex gap-3 text-sm">
-                      <span className="w-5 h-5 bg-amber-400 text-slate-900 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{i + 1}</span>
-                      <span className="text-slate-300">{exp}</span>
+                      <span className="w-5 h-5 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{i + 1}</span>
+                      <span className="text-slate-700">{exp}</span>
                     </div>
                   ))}
                 </div>
